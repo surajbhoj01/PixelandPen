@@ -79,9 +79,9 @@ const Navbar = () => {
               <img className="dark:invert" src={SearchIcon} alt="search" />
               <input type="search" className="text-base outline-none bg-transparent dark:text-white" placeholder="Enter text to search" />
             </button>
-            <button className="p-2 bg-blue-500 rounded-md text-white hover:bg-blue-600 transition-colors duration-200">
+            <Link to="/login"><button className="p-2 bg-blue-500 rounded-md text-white hover:bg-blue-600 transition-colors duration-200">
               Login
-            </button>
+            </button></Link>
             <button 
               className={`moon-btn p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 ${isDarkMode ? 'hidden' : ''}`} 
               onClick={toggleDark}

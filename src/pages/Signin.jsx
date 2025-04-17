@@ -28,7 +28,11 @@ const InputField = ({ type, name, value, onChange, placeholder, showToggle, show
 
 const AnimatedBackground = () => (
   <div className="absolute inset-0 -z-10">
-    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 animate-gradient-xy overflow-hidden"></div>
+    {/* Light mode gradient */}
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 animate-gradient-xy overflow-hidden dark:opacity-0"></div>
+    
+    {/* Dark mode gradient - different color scheme */}
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-800 to-indigo-900 animate-gradient-xy overflow-hidden opacity-0 dark:opacity-100"></div>
   </div>
 );
 
@@ -78,7 +82,6 @@ const LoginSignup = () => {
     resetForm();
     
     // Immediately change userType if needed
-    // This ensures we don't have to wait for the effect to run
     if (isLogin && userType === 'admin') {
       setUserType('normalUser');
     }
@@ -167,17 +170,17 @@ const LoginSignup = () => {
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden">
       <AnimatedBackground />
       
-      <div className="w-full max-w-lg bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-lg shadow-xl space-y-6 z-10">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-gray-200 mb-2">
+      <div className="w-full max-w-lg bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-lg shadow-xl space-y-6 z-10 transition-colors duration-300">
+        <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-gray-200 mb-2 transition-colors duration-300">
           {isLogin ? 'Sign In' : 'Sign Up'}
         </h2>
 
         <div className="flex justify-between items-center gap-4">
-          <label className="text-gray-700 dark:text-gray-300">Role:</label>
+          <label className="text-gray-700 dark:text-gray-300 transition-colors duration-300">Role:</label>
           <select
             value={userType}
             onChange={e => setUserType(e.target.value)}
-            className="flex-1 p-2 border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+            className="flex-1 p-2 bg-white border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-colors duration-300"
           >
             <option value="normalUser">Normal User</option>
             <option value="contributor">Contributor</option>
@@ -190,18 +193,18 @@ const LoginSignup = () => {
           <button
             type="submit"
             className={`w-full p-3 ${
-              userType === 'admin' ? 'bg-red-400 hover:bg-red-500' :
-              userType === 'contributor' ? 'bg-green-400 hover:bg-green-500' :
-              'bg-blue-400 hover:bg-blue-500'
-            } text-white rounded font-semibold transition-colors duration-300`}
+              userType === 'admin' ? 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700' :
+              userType === 'contributor' ? 'bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700' :
+              'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+            } text-white rounded font-semibold transition-all duration-300`}
           >
             {isLogin ? 'Sign In' : 'Sign Up'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
-          <button onClick={handleSwitchMode} className="text-blue-500 hover:underline">
+          <button onClick={handleSwitchMode} className="text-blue-500 dark:text-blue-400 hover:underline transition-colors duration-300">
             {isLogin ? 'Sign Up' : 'Sign In'}
           </button>
         </p>

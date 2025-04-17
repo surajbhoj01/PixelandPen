@@ -10,9 +10,6 @@ import MoonIcon from '../assets/images/moon-svgrepo-com.svg';
 import SunIcon from '../assets/images/light-mode-svgrepo-com.svg';
 import LanguageIcon from '../assets/images/language-svgrepo-com.svg';
 
-// Pages
-import Blog from '../pages/Blog';
-
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {

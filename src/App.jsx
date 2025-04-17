@@ -1,18 +1,7 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Components
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
-// Pages
-import Blog from './pages/Blog';
-import Signin from './pages/Signin';
-import About from './pages/About';
-import Contact from './pages/Contact';
-
-// Images
-import PixelPen from './assets/images/Pixel & Pen.png'
 
 const PixelAndPenHomepage = () => {
   const features = [
@@ -173,7 +162,6 @@ const PixelAndPenHomepage = () => {
 
       <Footer/>
     </div>
-      {/* <Signin/> */}
 
     </>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Components
 import Footer from './components/Footer';
@@ -89,9 +90,9 @@ const PixelAndPenHomepage = () => {
             <button className="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-blue-100 transition duration-200">
               Start Reading
             </button>
-            <button className="border border-white text-white px-6 py-3 mt-2 rounded-full hover:bg-white hover:text-blue-600  transition duration-200">
+            <Link to="/login"><button className="border border-white text-white px-6 py-3 mt-2 rounded-full hover:bg-white hover:text-blue-600  transition duration-200">
               Become a Contributor
-            </button>
+            </button></Link>
           </div>
         </div>
       </header>

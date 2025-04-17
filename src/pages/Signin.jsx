@@ -1,7 +1,5 @@
-// import AppleIcon from '../assets/images/apple-173-svgrepo-com.svg';
-// import FacebookIcon from '../assets/images/facebook-1-svgrepo-com.svg';
 // import GoogleIcon from '../assets/images/google-color-svgrepo-com.svg';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EyeOpenIcon from '../assets/images/eye-svgrepo-com.svg';
 import EyeCloseIcon from '../assets/images/eye-closed-svgrepo-com.svg';
 
@@ -28,6 +26,12 @@ const InputField = ({ type, name, value, onChange, placeholder, showToggle, show
   </div>
 );
 
+const AnimatedBackground = () => (
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 animate-gradient-xy overflow-hidden"></div>
+  </div>
+);
+
 const LoginSignup = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [userType, setUserType] = useState('normalUser');
@@ -40,6 +44,14 @@ const LoginSignup = () => {
     contributorReason: '',
     adminSecretCode: ''
   });
+
+  // Effect to handle userType changes when isLogin changes
+  useEffect(() => {
+    // If switching to signup and currently on admin role, change to normal user
+    if (!isLogin && userType === 'admin') {
+      setUserType('normalUser');
+    }
+  }, [isLogin, userType]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -59,8 +71,17 @@ const LoginSignup = () => {
   };
 
   const handleSwitchMode = () => {
+    // First set the login state
     setIsLogin(prev => !prev);
+    
+    // Then reset the form
     resetForm();
+    
+    // Immediately change userType if needed
+    // This ensures we don't have to wait for the effect to run
+    if (isLogin && userType === 'admin') {
+      setUserType('normalUser');
+    }
   };
 
   const renderFormFields = () => {
@@ -143,8 +164,10 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-900 p-4">
-      <div className="w-full max-w-lg bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl space-y-6">
+    <div className="flex items-center justify-center min-h-screen relative overflow-hidden">
+      <AnimatedBackground />
+      
+      <div className="w-full max-w-lg bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-lg shadow-xl space-y-6 z-10">
         <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-gray-200 mb-2">
           {isLogin ? 'Sign In' : 'Sign Up'}
         </h2>
@@ -158,7 +181,7 @@ const LoginSignup = () => {
           >
             <option value="normalUser">Normal User</option>
             <option value="contributor">Contributor</option>
-            <option value="admin">Admin</option>
+            {isLogin && <option value="admin">Admin</option>}
           </select>
         </div>
 
@@ -170,13 +193,13 @@ const LoginSignup = () => {
               userType === 'admin' ? 'bg-red-400 hover:bg-red-500' :
               userType === 'contributor' ? 'bg-green-400 hover:bg-green-500' :
               'bg-blue-400 hover:bg-blue-500'
-            } text-white rounded font-semibold`}
+            } text-white rounded font-semibold transition-colors duration-300`}
           >
             {isLogin ? 'Sign In' : 'Sign Up'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
           <button onClick={handleSwitchMode} className="text-blue-500 hover:underline">
             {isLogin ? 'Sign Up' : 'Sign In'}

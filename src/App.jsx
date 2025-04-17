@@ -36,17 +36,17 @@ const PixelAndPenHomepage = () => {
 
   const topContributors = [
     {
-      name: "Emily Rodriguez",
+      name: "Roshan Singh",
       posts: 42,
       avatar: "/api/placeholder/100/100"
     },
     {
-      name: "Alex Chen",
+      name: "Suraj Singh Bhoj",
       posts: 35,
       avatar: "/api/placeholder/100/100"
     },
     {
-      name: "Sarah Thompson",
+      name: "Md Javed",
       posts: 28,
       avatar: "/api/placeholder/100/100"
     }

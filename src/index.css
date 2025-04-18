@@ -2,9 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {/* The @layer base directive allows you to define global base styles, such as for the body element. */
+    body {
+      @apply bg-gray-50 dark:bg-gray-900; 
+    }
+  }
+
 @layer components{
     .sub-heading{
         @apply text-[1.3rem] my-2 font-bold;
+    }
+
+    .background-colors{
+        @apply bg-gray-50 dark:bg-gray-900;
     }
     .article-para{
         @apply mt-1;

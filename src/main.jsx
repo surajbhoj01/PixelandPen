@@ -1,49 +1,78 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider } from './contexts/ThemeContext';
-import './index.css'
+import { ThemeProvider } from "./contexts/ThemeContext";
+import "./index.css";
 
-import Navbar from './components/Navbar.jsx';
+import Navbar from "./components/Navbar.jsx";
 
-import App from './App.jsx'
-import Blog from './pages/Blog';
-import Category from './pages/Category';
-import Signin from './pages/Signin';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import App from "./App.jsx";
+import Blog from "./pages/Blog";
+import Category from "./pages/Category";
+import Signin from "./pages/Signin";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
-      path: "/",
-      element: <><Navbar /><App/></>
+    path: "/",
+    element: (
+      <>
+        <Navbar />
+        <App />
+      </>
+    ),
   },
   {
-      path: "/blog",
-      element: <><Navbar /><Blog/></>
+    path: "/blog",
+    element: (
+      <>
+        <Navbar />
+        <Blog />
+      </>
+    ),
   },
   {
-      path: "/category",
-      element: <><Navbar /><Category/></>
+    path: "/category",
+    element: (
+      <>
+        <Navbar />
+        <Category />
+      </>
+    ),
   },
   {
     path: "/about",
-    element: <><Navbar/><About/></>
+    element: (
+      <>
+        <Navbar />
+        <About />
+      </>
+    ),
   },
   {
     path: "/contact",
-    element: <><Navbar/><Contact/></>
+    element: (
+      <>
+        <Navbar />
+        <Contact />
+      </>
+    ),
   },
   {
     path: "/login",
-    element: <><Signin/></>
+    element: (
+      <>
+        <Signin />
+      </>
+    ),
   },
-])
+]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </ThemeProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

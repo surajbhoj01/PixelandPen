@@ -115,7 +115,7 @@ const PixelAndPenHomepage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="min-h-screen background-colors transition-colors duration-200">
         {/* Hero Section */}
         <header className="animated-gradient bg-gradient-to-r  from-blue-500 to-purple-600 dark:from-blue-600 dark:to-purple-700 text-white py-20">
           <div className="container mx-auto text-center px-4">

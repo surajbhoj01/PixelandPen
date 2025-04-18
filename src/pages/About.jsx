@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const About = () => {
-  return (
-    <div>About</div>
-  )
-}
+  return <div className="background-colors">About</div>;
+};
 
-export default About
+export default About;

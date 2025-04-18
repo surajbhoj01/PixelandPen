@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import Footer from "../components/Footer";
 
 // Theme context
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return savedTheme === 'dark' || (!savedTheme && prefersDark);
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    return savedTheme === "dark" || (!savedTheme && prefersDark);
   });
 
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   }, [isDarkMode]);
 
@@ -32,17 +35,20 @@ const ThemeProvider = ({ children }) => {
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [images, setImages] = useState(Array(4).fill(null));
-  const API_KEY = 'FavQGwLy5WRGoCTP3HGueoiVwBlfVPjKz2gLJ9wcgS8';
+  const API_KEY = "FavQGwLy5WRGoCTP3HGueoiVwBlfVPjKz2gLJ9wcgS8";
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch(`https://api.unsplash.com/photos/?client_id=${API_KEY}`);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const response = await fetch(
+          `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
-        setImages(data.map(img => img.urls.regular));
+        setImages(data.map((img) => img.urls.regular));
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error("Error fetching images:", error);
       }
     };
 
@@ -59,13 +65,13 @@ const Slider = () => {
 
   const changeSlide = (direction) => {
     setCurrentSlide((prev) => {
-      if (direction === 'next') return prev === 3 ? 0 : prev + 1;
+      if (direction === "next") return prev === 3 ? 0 : prev + 1;
       return prev === 0 ? 3 : prev - 1;
     });
   };
 
   const SlideCard = () => (
-    <div className="card space-y-4 flex-col dark:text-white dark:bg-gray-800 text-black absolute bottom-0 left-3 md:left-12 rounded-md p-4 bg-white w-[50%] h-[16rem] md:w-[27%] md:h-[13rem]">
+    <div className="card opacity-85 space-y-4 flex-col dark:text-white dark:bg-gray-800 text-black absolute bottom-0 left-3 md:left-12 rounded-md p-4 bg-white w-[50%] h-[16rem] md:w-[27%] md:h-[13rem]">
       <span className="bg-slate-700 text-white p-1 rounded-md">Technology</span>
       <p className="md:text-2xl font-semibold">
         The impact of Technology on workplace: How Technology is changing.
@@ -84,7 +90,7 @@ const Slider = () => {
         <div
           key={index}
           className={`slide md:h-[34rem] h-[42] relative ${
-            index === currentSlide ? '' : 'hidden'
+            index === currentSlide ? "" : "hidden"
           }`}
         >
           <div className="pgno absolute top-0 left-4 antialiased animate-fade text-gray-300">
@@ -99,13 +105,13 @@ const Slider = () => {
         </div>
       ))}
       <button
-        onClick={() => changeSlide('prev')}
+        onClick={() => changeSlide("prev")}
         className="prev absolute top-40 text-white p-2 hover:bg-slate-50 focus:text-black focus:bg-slate-50 hover:text-black hover:cursor-pointer left-3"
       >
         &#10094;
       </button>
       <button
-        onClick={() => changeSlide('next')}
+        onClick={() => changeSlide("next")}
         className="next absolute top-40 text-white p-2 hover:bg-slate-50 focus:text-black focus:bg-slate-50 hover:text-black hover:cursor-pointer right-3"
       >
         &#10095;
@@ -117,18 +123,21 @@ const Slider = () => {
 // Enhanced BlogCard component with image fetching
 const BlogCard = () => {
   const [cardImage, setCardImage] = useState(null);
-  const API_KEY = 'FavQGwLy5WRGoCTP3HGueoiVwBlfVPjKz2gLJ9wcgS8';
+  const API_KEY = "FavQGwLy5WRGoCTP3HGueoiVwBlfVPjKz2gLJ9wcgS8";
 
   useEffect(() => {
     const fetchCardImage = async () => {
       try {
-        const response = await fetch(`https://api.unsplash.com/photos/?client_id=${API_KEY}`);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const response = await fetch(
+          `https://api.unsplash.com/photos/?client_id=${API_KEY}`
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
         const randomIndex = Math.floor(Math.random() * data.length);
         setCardImage(data[randomIndex].urls.small_s3);
       } catch (error) {
-        console.error('Error fetching card image:', error);
+        console.error("Error fetching card image:", error);
       }
     };
 
@@ -152,8 +161,12 @@ const BlogCard = () => {
       </p>
       <div className="information-writer space-x-6 items-center flex flex-wrap">
         <img src="/api/placeholder/32/32" alt="profile" className="size-8" />
-        <p className="dark:text-gray-200 text-gray-500 text-sm">Anglena Jolie</p>
-        <p className="dark:text-gray-200 text-gray-500 text-sm">August 20,2020</p>
+        <p className="dark:text-gray-200 text-gray-500 text-sm">
+          Anglena Jolie
+        </p>
+        <p className="dark:text-gray-200 text-gray-500 text-sm">
+          August 20,2020
+        </p>
       </div>
     </div>
   );
@@ -163,7 +176,7 @@ const BlogCard = () => {
 const HomePage = () => {
   return (
     <ThemeProvider>
-      <div className="bg-white text-black dark:bg-custom-blue dark:text-white">
+      <div className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
         <Slider />
         <div className="latest-posts dark:bg-gray-900 relative dark:text-white bg-gray-100 rounded-md text-black text-xl flex-col mt-36 md:w-[90%] p-2 w-[100%] m-auto">
           <div className="heading font-semibold">Latest Post</div>
@@ -174,6 +187,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </ThemeProvider>
   );
 };

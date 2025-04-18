@@ -1,36 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 
-// Theme context
-import { createContext, useContext } from "react";
-const ThemeContext = createContext();
-
-const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    return savedTheme === "dark" || (!savedTheme && prefersDark);
-  });
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDarkMode]);
-
-  return (
-    <ThemeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-
 // Enhanced Slider component with auto-slide
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -145,7 +115,7 @@ const BlogCard = () => {
   }, []);
 
   return (
-    <div className="card space-y-2 flex-col w-[300px] p-2 dark:bg-slate-700 rounded-md bg-gray-200">
+    <div className="card space-y-2 flex-col w-[18rem] p-2 dark:bg-slate-700 rounded-md bg-gray-200">
       <div className="p-2 h-48 w-[280px]">
         <img
           src={cardImage || "/api/placeholder/280/192"}
@@ -156,7 +126,7 @@ const BlogCard = () => {
       <span className="bg-blue-200 dark:bg-blue-600 text-xs rounded-md p-2">
         Technology
       </span>
-      <p className="md:text-2xl font-semibold">
+      <p className="md:text-[1.3rem] font-semibold">
         The impact of Technology on workplace: How Technology is changing.
       </p>
       <div className="information-writer space-x-6 items-center flex flex-wrap">
@@ -175,20 +145,21 @@ const BlogCard = () => {
 // Main App component
 const HomePage = () => {
   return (
-    <ThemeProvider>
+    <>
+    
       <div className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
         <Slider />
-        <div className="latest-posts dark:bg-gray-900 relative dark:text-white bg-gray-100 rounded-md text-black text-xl flex-col mt-36 md:w-[90%] p-2 w-[100%] m-auto">
-          <div className="heading font-semibold">Latest Post</div>
-          <div className="cards gap-16 items-center justify-center p-2 rounded-md flex flex-wrap">
-            {[...Array(7)].map((_, index) => (
+        <div className=" dark:bg-gray-900 relative dark:text-white bg-gray-100 rounded-md text-black text-xl flex-col mt-[2rem]  p-2 w-[100%] ">
+          <h1 className="font-semibold text-[1.9rem]">Latest Post</h1>
+          <div className="flex flex-wrap gap-4 justify-center items-center mt-4 p-2 rounded-md">
+            {[...Array(4)].map((_, index) => (
               <BlogCard key={index} />
             ))}
           </div>
         </div>
       </div>
       <Footer />
-    </ThemeProvider>
+      </>
   );
 };
 

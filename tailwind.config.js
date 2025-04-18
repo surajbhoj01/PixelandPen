@@ -7,11 +7,7 @@ export default {
       animation: {
         "gradient-xy": "gradient-xy 15s ease infinite",
       },
-      backgroundColor: {
-        "custom-blue": "rgb(13 18 28 / var(--tw-bg-opacity))", // Your custom blue color
-        "hover-col": "#e8e1e10f",
-        "light-hover": "#00000012",
-      },
+
       keyframes: {
         "gradient-xy": {
           "0%, 100%": {
